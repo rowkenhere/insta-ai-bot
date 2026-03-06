@@ -8,7 +8,7 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL="cognitivecomputations/dolphin-3.0-r1-mistral-24b:free"
+MODEL="cognitivecomputations/dolphin-2.9.2-mixtral-8x22b"
 
 BOT_NAME="bot"
 
