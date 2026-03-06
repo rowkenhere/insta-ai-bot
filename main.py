@@ -3,8 +3,8 @@ import requests
 import time
 import random
 
-USERNAME="drxn.ia"
-PASSWORD="786200612"
+USERNAME="benx.ai0"
+PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
