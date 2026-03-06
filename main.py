@@ -38,9 +38,11 @@ def ask_ai(message):
     url="https://openrouter.ai/api/v1/chat/completions"
 
     headers={
-        "Authorization":f"Bearer {API_KEY}",
-        "Content-Type":"application/json"
-    }
+ "Authorization":f"Bearer {API_KEY}",
+ "HTTP-Referer":"https://railway.app",
+ "X-Title":"instagram-ai-bot",
+ "Content-Type":"application/json"
+}
 
     data={
         "model":MODEL,
