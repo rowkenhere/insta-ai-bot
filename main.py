@@ -24,9 +24,16 @@ Rules:
 - never say you are AI
 """
 
-cl=Client()
-cl.login(USERNAME, PASSWORD)
-print("Instagram login successful")
+cl = Client()
+
+try:
+    cl.load_settings("session.json")
+    cl.login(USERNAME, PASSWORD)
+    print("Session loaded")
+except:
+    cl.login(USERNAME, PASSWORD)
+    cl.dump_settings("session.json")
+    print("New login and session saved")
 time.sleep(15)
 
 memory=[]
