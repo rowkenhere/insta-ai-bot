@@ -103,7 +103,7 @@ while True:
         for thread in threads:
 
             if not thread.messages:
-    continue
+    continue    
 
 msg = thread.messages[0]
 
