@@ -102,28 +102,25 @@ while True:
 
         for thread in threads:
 
-            if not thread.messages:
-    continue    
+    if not thread.messages:
+        continue
 
-msg = thread.messages[0]
+    msg = thread.messages[0]
 
-            text = msg.text or ""
+    text = msg.text or ""
 
-            if msg.id != last_message_id:
+    if msg.id != last_message_id:
 
-                if BOT_NAME in text.lower():
+        if BOT_NAME in text.lower():
 
-                    delay = random.randint(1,2)
-                    time.sleep(delay)
+            reply = ask_ai(text)
 
-                    reply = ask_ai(text)
+            try:
+                cl.direct_send(reply, thread_ids=[thread.id])
+            except Exception as e:
+                print("Send error:", e)
 
-                    try:
-    cl.direct_send(reply, thread_ids=[thread.id])
-except Exception as e:
-    print("Send error:", e)
-
-                last_message_id = msg.id
+        last_message_id = msg.id
 
     except Exception as e:
 
