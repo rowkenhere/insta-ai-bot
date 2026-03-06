@@ -38,26 +38,28 @@ time.sleep(15)
 
 memory=[]
 
-def ask_ai(message):
-
-    memory.append({"role":"user","content":message})
-
+def ask_ai(text):
     url = "https://openrouter.ai/api/v1/chat/completions"
 
-headers = {
-    "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json",
-    "HTTP-Referer": "https://railway.app",
-    "X-Title": "insta-ai-bot"
-}
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
 
-data = {
-    "model": "mistralai/mistral-7b-instruct:free",
-    "messages": [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": text}
-    ]
-}
+    data = {
+        "model": "mistralai/mistral-7b-instruct:free",
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": text}
+        ]
+    }
+
+    r = requests.post(url, headers=headers, json=data)
+    result = r.json()
+
+    print("OpenRouter response:", result)
+
+    return result["choices"][0]["message"]["content"]
 
     r=requests.post(url,headers=headers,json=data)
 
