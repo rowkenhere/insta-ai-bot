@@ -45,11 +45,13 @@ def ask_ai(message):
 }
 
     data={
-        "model":MODEL,
-        "messages":[
-            {"role":"system","content":SYSTEM_PROMPT}
-        ]+memory[-6:]
-    }
+ "model":MODEL,
+ "messages":[
+  {"role":"system","content":SYSTEM_PROMPT}
+ ]+memory[-6:],
+ "temperature":0.7,
+ "max_tokens":500
+}
 
     r=requests.post(url,headers=headers,json=data)
 
@@ -58,7 +60,7 @@ def ask_ai(message):
     if "choices" in res:
         reply=res["choices"][0]["message"]["content"]
     else:
-        print("AI API error:",res)
+        print("OpenRouter response:",res)
         reply="AI error bro"
 
     memory.append({"role":"assistant","content":reply})
