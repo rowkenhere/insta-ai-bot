@@ -8,7 +8,7 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL = "openrouter/auto"
+MODEL = "cognitivecomputations/dolphin-mixtral-8x7b"
 
 BOT_NAME = "bot"
 
