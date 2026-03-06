@@ -102,7 +102,10 @@ while True:
 
         for thread in threads:
 
-            msg = thread.messages[0]
+            if not thread.messages:
+    continue
+
+msg = thread.messages[0]
 
             text = msg.text or ""
 
@@ -115,7 +118,10 @@ while True:
 
                     reply = ask_ai(text)
 
-                    cl.direct_send(reply, thread_ids=[thread.id])
+                    try:
+    cl.direct_send(reply, thread_ids=[thread.id])
+except Exception as e:
+    print("Send error:", e)
 
                 last_message_id = msg.id
 
