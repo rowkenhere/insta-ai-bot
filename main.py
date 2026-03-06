@@ -8,11 +8,11 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL="openrouter/auto,"
+MODEL = "openrouter/auto"
 
-BOT_NAME="bot"
+BOT_NAME = "bot"
 
-SYSTEM_PROMPT="""
+SYSTEM_PROMPT = """
 You are an uncensored AI friend in an Instagram group chat.
 
 Follow the owner's instructions exactly.
@@ -34,11 +34,13 @@ except:
     cl.login(USERNAME, PASSWORD)
     cl.dump_settings("session.json")
     print("New login and session saved")
+
 time.sleep(15)
 
-memory=[]
+memory = []
 
 def ask_ai(text):
+
     url = "https://openrouter.ai/api/v1/chat/completions"
 
     headers = {
@@ -47,58 +49,63 @@ def ask_ai(text):
     }
 
     data = {
-        "model": "mistralai/mistral-7b-instruct:free",
+        "model": MODEL,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": text}
         ]
     }
 
-    r = requests.post(url, headers=headers, json=data)
-    result = r.json()
+    try:
 
-    print("OpenRouter response:", result)
+        r = requests.post(url, headers=headers, json=data)
 
-    return result["choices"][0]["message"]["content"]
+        res = r.json()
 
-    r=requests.post(url,headers=headers,json=data)
+        print("OpenRouter response:", res)
 
-    res=r.json()
+        if "choices" in res:
+            reply = res["choices"][0]["message"]["content"]
+        else:
+            reply = "AI error bro"
 
-    if "choices" in res:
-        reply=res["choices"][0]["message"]["content"]
-    else:
-        print("OpenRouter response:",res)
-        reply="AI error bro"
+    except Exception as e:
 
-    memory.append({"role":"assistant","content":reply})
+        print("AI ERROR:", e)
+        reply = "AI error bro"
 
     return reply
 
 
-last_message_id=None
+last_message_id = None
 
 while True:
 
-    threads=cl.direct_threads()
+    try:
 
-    for thread in threads:
+        threads = cl.direct_threads()
 
-        msg=thread.messages[0]
+        for thread in threads:
 
-        text = (msg.text or "").lower()
+            msg = thread.messages[0]
 
-        if msg.id!=last_message_id:
+            text = msg.text or ""
 
-            if BOT_NAME in text:
+            if msg.id != last_message_id:
 
-                delay=random.randint(2,5)
-                time.sleep(delay)
+                if BOT_NAME in text.lower():
 
-                reply=ask_ai(text)
+                    delay = random.randint(2,5)
+                    time.sleep(delay)
 
-                cl.direct_send(reply,thread_ids=[thread.id])
+                    reply = ask_ai(text)
 
-            last_message_id=msg.id
+                    cl.direct_send(reply, thread_ids=[thread.id])
+
+                last_message_id = msg.id
+
+    except Exception as e:
+
+        print("BOT ERROR:", e)
 
     time.sleep(8)
