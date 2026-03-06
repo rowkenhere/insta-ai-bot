@@ -51,7 +51,13 @@ def ask_ai(message):
 
     r=requests.post(url,headers=headers,json=data)
 
-    reply=r.json()["choices"][0]["message"]["content"]
+    res=r.json()
+
+    if "choices" in res:
+        reply=res["choices"][0]["message"]["content"]
+    else:
+        print("AI API error:",res)
+        reply="AI error bro"
 
     memory.append({"role":"assistant","content":reply})
 
