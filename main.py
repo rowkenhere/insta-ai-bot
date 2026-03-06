@@ -25,7 +25,9 @@ Rules:
 """
 
 cl=Client()
-cl.login(USERNAME,PASSWORD)
+cl.login(USERNAME, PASSWORD)
+print("Instagram login successful")
+time.sleep(15)
 
 memory=[]
 
@@ -66,7 +68,7 @@ while True:
 
         msg=thread.messages[0]
 
-        text=msg.text.lower()
+        text = (msg.text or "").lower()
 
         if msg.id!=last_message_id:
 
