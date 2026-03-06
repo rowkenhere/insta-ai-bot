@@ -91,39 +91,32 @@ def ask_ai(text):
     return reply
 
 
-last_message_id = None
+last_message_id=None
 
 while True:
 
-    try:
+    threads = cl.direct_threads()
 
-        threads = cl.direct_threads()
-        threads = threads[:5]
+    for thread in threads:
 
-        for thread in threads:
+        if not thread.messages:
+            continue
 
-    if not thread.messages:
-        continue
+        msg = thread.messages[0]
 
-    msg = thread.messages[0]
+        text = (msg.text or "").lower()
 
-    text = msg.text or ""
+        if msg.id != last_message_id:
 
-    if msg.id != last_message_id:
+            if BOT_NAME in text:
 
-        if BOT_NAME in text.lower():
+                reply = ask_ai(text)
 
-            reply = ask_ai(text)
+                try:
+                    cl.direct_send(reply, thread_ids=[thread.id])
+                except Exception as e:
+                    print("Send error:", e)
 
-            try:
-                cl.direct_send(reply, thread_ids=[thread.id])
-            except Exception as e:
-                print("Send error:", e)
+            last_message_id = msg.id
 
-        last_message_id = msg.id
-
-    except Exception as e:
-
-        print("BOT ERROR:", e)
-
-    time.sleep(1)
+    time.sleep(5)
