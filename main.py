@@ -8,7 +8,7 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL="nousresearch/hermes-2-pro-llama-3-8b:free"
+MODEL="cognitivecomputations/dolphin-3.0-r1-mistral-24b:free"
 
 BOT_NAME="bot"
 
