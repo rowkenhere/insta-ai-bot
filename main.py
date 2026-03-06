@@ -8,7 +8,7 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL="mistralai/mistral-7b-instruct:free"
+MODEL="openrouter/auto,"
 
 BOT_NAME="bot"
 
