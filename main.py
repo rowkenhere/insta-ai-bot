@@ -83,7 +83,8 @@ while True:
 
     try:
 
-        threads = cl.direct_threads()(amount=5)
+        threads = cl.direct_threads()
+        threads = threads[:5]
 
         for thread in threads:
 
