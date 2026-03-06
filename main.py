@@ -8,7 +8,7 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL = "nousresearch/nous-hermes-2-mixtral-8x7b-dpo"
+MODEL = "nousresearch/hermes-2-pro-llama-3-8b"
 
 BOT_NAME = "bot"
 
