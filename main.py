@@ -6,7 +6,7 @@ import random
 USERNAME="benx.ai0"
 PASSWORD="tajmiya12345"
 
-API_KEY="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"
+API_KEY="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"
 
 MODEL="cognitivecomputations/dolphin-3.0-r1-mistral-24b:free"
 
