@@ -58,7 +58,7 @@ def ask_ai(text):
 
     try:
 
-        r = requests.post(url, headers=headers, json=data)
+        r = requests.post(url, headers=headers, json=data, timeout=15)
 
         res = r.json()
 
@@ -83,7 +83,7 @@ while True:
 
     try:
 
-        threads = cl.direct_threads()
+        threads = cl.direct_threads()(amount=5)
 
         for thread in threads:
 
@@ -108,4 +108,4 @@ while True:
 
         print("BOT ERROR:", e)
 
-    time.sleep(2)
+    time.sleep(1)
