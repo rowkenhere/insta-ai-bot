@@ -46,10 +46,18 @@ try:
     cl.load_settings("session.json")
     cl.login(USERNAME, PASSWORD)
     print("Session loaded")
-except:
+
+except Exception as e:
+
+    print("Session not found, logging in...")
+
     cl.login(USERNAME, PASSWORD)
-    cl.dump_settings("session.json")
-    print("New login and session saved")
+
+    try:
+        cl.dump_settings("session.json")
+        print("New session saved")
+    except:
+        print("Session save failed")
 
 time.sleep(5)
 
