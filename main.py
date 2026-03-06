@@ -8,7 +8,7 @@ PASSWORD="tajmiya12345"
 
 API_KEY="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"
 
-MODEL="cognitivecomputations/dolphin-2.9.2-mixtral-8x22b"
+MODEL="mistralai/mistral-7b-instruct:free"
 
 BOT_NAME="bot"
 
@@ -42,22 +42,21 @@ def ask_ai(message):
 
     memory.append({"role":"user","content":message})
 
-    url="https://openrouter.ai/api/v1/chat/completions"
+    url = "https://openrouter.ai/api/v1/chat/completions"
 
-    headers={
- "Authorization":f"Bearer {API_KEY}",
- "HTTP-Referer":"https://railway.app",
- "X-Title":"instagram-ai-bot",
- "Content-Type":"application/json"
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json",
+    "HTTP-Referer": "https://railway.app",
+    "X-Title": "insta-ai-bot"
 }
 
-    data={
- "model":MODEL,
- "messages":[
-  {"role":"system","content":SYSTEM_PROMPT}
- ]+memory[-6:],
- "temperature":0.7,
- "max_tokens":500
+data = {
+    "model": "mistralai/mistral-7b-instruct:free",
+    "messages": [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": text}
+    ]
 }
 
     r=requests.post(url,headers=headers,json=data)
