@@ -35,7 +35,7 @@ except:
     cl.dump_settings("session.json")
     print("New login and session saved")
 
-time.sleep(15)
+time.sleep(5)
 
 memory = []
 
@@ -95,7 +95,7 @@ while True:
 
                 if BOT_NAME in text.lower():
 
-                    delay = random.randint(2,5)
+                    delay = random.randint(1,2)
                     time.sleep(delay)
 
                     reply = ask_ai(text)
@@ -108,4 +108,4 @@ while True:
 
         print("BOT ERROR:", e)
 
-    time.sleep(8)
+    time.sleep(2)
